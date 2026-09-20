@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
@@ -9,7 +9,6 @@ import google.generativeai as genai
 
 app = FastAPI()
 
-# Enable cross-origin calls so your frontend layout can communicate with the backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,21 +25,21 @@ class NavigationQueryMatrix(BaseModel):
 @app.post("/api/agent")
 async def process_agentic_rag(payload: NavigationQueryMatrix):
     try:
-        # 1. RETRIEVAL LAYER: Scrape live emergency feeds near coordinates
+        # 1. RETRIEVAL LAYER: Scrape live emergency feeds near target coordinates
         scraped_context = ""
         with DDGS() as ddgs:
             results = [r for r in ddgs.text(f"emergency hazard crime traffic incident near {payload.lat}, {payload.lng}", max_results=4)]
             if results:
                 scraped_context = "\\n".join([f"Source: {item['title']} - {item['body']}" for item in results])
 
-        # 2. REASONING LAYER (The RAG Core Engine)
+        # 2. GENERATION LAYER (The RAG Reasoning Matrix Engine)
         genai.configure(api_key=os.environ.get("GOOGLE_GEMINI_API_KEY"))
         model = genai.GenerativeModel('gemini-pro')
         
         system_instructions = f"""
-        You are the safety brain of SafePath AI. 
-        Analyze the query: "{payload.prompt}" 
-        Cross-reference it with this live scraped context data:
+        You are the core safety brain of SafePath AI. 
+        Analyze the user's query: "{payload.prompt}" 
+        Cross-reference it with this live scraped internet context records:
         ---
         {scraped_context}
         ---
@@ -50,13 +49,13 @@ async def process_agentic_rag(payload: NavigationQueryMatrix):
             "threat_detected": "Clear short name of danger or 'Baseline Pedestrian Safety Verified'",
             "risk_weight": a float value between 0.0 and 1.0
         }}
-        Do not include markdown tags like ```json or text. Output raw JSON only.
+        Do not include markdown tags like ```json or conversation text. Output raw JSON string only.
         """
         
         ai_response = model.generate_content(system_instructions)
         ai_data = json.loads(ai_response.text.strip())
 
-        # 3. PERSISTENCE LAYER: Stream coordinates to Supabase
+        # 3. PERSISTENCE LAYER: Stream coordinates to Supabase PostGIS
         supabase_endpoint = os.environ.get("SUPABASE_URL")
         supabase_secret_key = os.environ.get("SUPABASE_ANON_KEY")
 

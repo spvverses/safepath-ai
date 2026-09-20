@@ -5,19 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SafePath AI — Enterprise Predictive Routing Command Console</title>
     
-    <!-- TailWind CSS & Typography Icon Engines -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- TailWind CSS Framework & Icon Utilities -->
+    <script src="https://tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cloudflare.com" />
     
-  
-    <!-- Fully Qualified Open-Source Spatial Stylesheet -->
-<link rel="stylesheet" href="https://unpkg.com" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-
-<!-- Core Mapping Calculation Engine -->
-<script src="https://unpkg.com" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
+    <!-- Fully Qualified Open-Source Spatial Stylesheet Maps Engine -->
+    <link rel="stylesheet" href="https://unpkg.com" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     
-    <!-- Global Data Highway WebSocket Client SDK -->
+    <!-- Supabase Global Data Highway WebSocket Infrastructure Client -->
     <script src="https://jsdelivr.net"></script>
 
     <style>
@@ -26,7 +22,22 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050811; }
         .mono-font { font-family: 'JetBrains Mono', monospace; }
         
-        /* Premium Translucent Cyber Glassmorphic Paneling */
+        /* Strict Blueprint Map Dimensions to Overwrite Box Collapse Faults */
+        #map {
+            height: 100% !important;
+            width: 100% !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        /* Premium Cyber Autopilot Style Layer Filters */
+        .premium-cyber-map .leaflet-tile-container {
+            filter: invert(100%) hue-rotate(190deg) brightness(90%) contrast(95%) saturate(80%);
+        }
+        
+        /* Glassmorphism Sidebar Interfaces */
         .glass-panel {
             background: rgba(10, 16, 30, 0.75);
             backdrop-filter: blur(20px) saturate(180%);
@@ -34,13 +45,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.7);
         }
-        
-        /* Premium Cyber Autopilot Inversion Map Skin Filter */
-        .premium-cyber-map .leaflet-tile-container {
-            filter: invert(100%) hue-rotate(190deg) brightness(90%) contrast(95%) saturate(80%);
-        }
-        .leaflet-container { background: #050811 !important; }
-        
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 99px; }
         .glow-red { box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
@@ -48,17 +52,17 @@
 </head>
 <body class="text-slate-100 flex flex-col h-screen w-screen overflow-hidden antialiased select-none">
 
-    <!-- ATMOSPHERIC ACCENT BLURS -->
+    <!-- DEEP AMBIENT GLOW FILTERS -->
     <div class="absolute top-0 left-1/3 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[160px] pointer-events-none z-10"></div>
     <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[140px] pointer-events-none z-10"></div>
 
-    <!-- MAIN DASHBOARD NAVIGATION HEADER -->
+    <!-- COMMAND CONSOLE SYSTEM HEADER -->
     <header class="w-full bg-[#080d18]/90 backdrop-blur-xl px-6 py-4 flex justify-between items-center border-b border-slate-800/60 z-20 shadow-lg">
         <div class="flex items-center gap-4">
             <div class="h-3 w-3 rounded-full bg-red-500 animate-pulse glow-red"></div>
             <div class="flex flex-col">
                 <h1 class="text-md font-extrabold tracking-widest text-slate-200">SAFEPATH <span class="text-red-500 font-mono text-xs bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20 ml-1">AI</span></h1>
-                <span class="text-[9px] font-bold text-slate-500 tracking-wider uppercase mt-0.5">Geospatial RAG Platform Platform</span>
+                <span class="text-[9px] font-bold text-slate-500 tracking-wider uppercase mt-0.5">Geospatial RAG Platform</span>
             </div>
         </div>
         
@@ -79,11 +83,11 @@
         </div>
     </header>
 
-    <!-- CORE WORKSPACE VIEWPANEL -->
+    <!-- CORE WORKSPACE VIEWPANEL GRAPH -->
     <div class="flex-1 w-full relative flex">
-        <div id="map" class="w-full h-full z-0 premium-cyber-map"></div>
+        <div id="map" class="premium-cyber-map"></div>
 
-        <!-- LEFT CONTROL DASHBOARD OVERLAY CONTROLLERS -->
+        <!-- FLOATING OVERLAY DIALOG COGNITION PANEL -->
         <div class="absolute top-6 left-6 z-10 w-[380px] flex flex-col gap-4 pointer-events-none">
             
             <div class="glass-panel p-6 rounded-2xl pointer-events-auto transition-all">
@@ -124,7 +128,7 @@
                 </button>
             </div>
 
-            <!-- STREAMING TELEMETRY OBSERVABILITY CONSOLE -->
+            <!-- STREAMING TELEMETRY OBSERVABILITY GREEN TEXT CONSOLE -->
             <div class="glass-panel p-4 rounded-2xl pointer-events-auto">
                 <div class="flex justify-between items-center mb-2.5 border-b border-slate-900 pb-2">
                     <span class="text-[9px] font-bold tracking-widest text-slate-500 uppercase flex items-center gap-2">
@@ -139,12 +143,8 @@
         </div>
     </div>
 
-    <!-- HIGH-YIELD CPM ANCHOR ADS FOOTER -->
+    <!-- SPONSOR METADATA REVENUE BLOCK PANEL -->
     <footer class="w-full h-20 bg-[#030509] border-t border-slate-900 z-20 flex flex-col sm:flex-row items-center justify-between px-8 py-4 gap-4 shadow-2xl">
         <div class="text-[11px] font-medium text-slate-400 flex items-center gap-2.5">
-            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded-md text-[9px] font-extrabold text-slate-400 tracking-wider shadow-inner">AFFILIATE PARTNER</span>
+            <span class="px-2 py-0.5 bg-slate-900 border border-slate-800 rounded-md text-[9px] font-extrabold text-slate-400 tracking-wider shadow-inner">AFFILIATE INTEGRATION</span>
             <span id="dynamic-affiliate-msg" class="text-slate-500">Evaluating locale spatial metadata...</span>
-            <a href="https://safetywing.com" target="_blank" class="text-blue-400 font-semibold flex items-center gap-1 transition-all">Secure Global Coverage <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i></a>
-        </div>
-        
-        <div class="w-[340px] h-[48px] bg-slate-950 rounded-xl border border-slate-900 flex items-center justify-between px-4 shadow-inner">

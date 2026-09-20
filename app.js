@@ -4,14 +4,9 @@ const SUPABASE_URL = "https://nzifhdpzkhgtpbopwuue.supabase.co/";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56aWZoZHB6a2hndHBib3B3dXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4ODY4MzYsImV4cCI6MjEwNTQ2MjgzNn0.hEzMRSafew3lnyhivLrS1qBs58UTHdGaR_bgt0crD18"; 
 // =========================================================================
 
-// ==================== CONFIGURATION HUB ====================
-// Paste your exact Supabase Project parameters here inside the quotation strings.
-const SUPABASE_URL = "https://supabase.co"; 
-const SUPABASE_KEY = "PASTE_YOUR_MASSIVE_SUPABASE_ANON_PUBLIC_KEY_STARTING_WITH_eyJ_HERE"; 
-// ============================================================
 
-// 1. Initialize Baseline Geospatial Grid Viewport Map
-let clientLat = 13.0827; // Default Fallback Coordinates Anchor Centroid (Chennai)
+// 1. Initialize Baseline Geospatial Grid Viewport Map Canvas
+let clientLat = 13.0827; // Default Fallback Coordinates Centroid Anchor (Chennai)
 let clientLng = 80.2707;
 
 const map = L.map('map', { 
@@ -24,19 +19,19 @@ L.control.zoom({ position: 'bottomright' }).addTo(map);
 // Pull high-contrast open-source street tile layers from OpenStreetMap channels
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-// Fix Leaflet sizing adjustments dynamically across responsive Tailwind panels
+// Fix Leaflet sizing adjustments dynamically across responsive Tailwind dashboard boxes
 setTimeout(() => {
     map.invalidateSize();
 }, 250);
 
-// 2. Negotiate Native Browser Geolocation Hardware Permission API
+// 2. Negotiate Native Browser Geolocation Hardware Permission API on Launch
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
         (position) => {
             clientLat = position.coords.latitude;
             clientLng = position.coords.longitude;
             
-            // Re-center map layout smoothly on active coordinates
+            // Re-center map layout smoothly on active tracking coordinates
             map.setView([clientLat, clientLng], 14);
             document.getElementById('gps-status-text').innerText = "Sensor Matrix Active";
             document.getElementById('gps-status-text').className = "text-emerald-400 font-semibold";
@@ -71,32 +66,34 @@ if (navigator.geolocation) {
 
 function appendConsoleLog(messageText, textClass = "text-emerald-400") {
     const container = document.getElementById('console-logs');
-    const element = document.createElement('div');
-    element.className = `leading-relaxed tracking-tight font-mono ${textClass}`;
-    element.innerText = messageText;
-    container.appendChild(element);
-    container.scrollTop = container.scrollHeight;
+    if (container) {
+        const element = document.createElement('div');
+        element.className = `leading-relaxed tracking-tight font-mono ${textClass}`;
+        element.innerText = messageText;
+        container.appendChild(element);
+        container.scrollTop = container.scrollHeight;
+    }
 }
 
-// 3. Establish Connections to Supabase Real-Time Engine
+// 3. Establish Connections to Supabase Real-Time Engine (Persistent WebSockets channel)
 const supabaseInstance = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 supabaseInstance
     .channel('realtime-geospatial-safety')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'live_threats' }, (payload) => {
         const geomCoordinates = payload.new.location.coordinates;
-        const incidentLng = geomCoordinates;
-        const incidentLat = geomCoordinates;
+        const incidentLng = geomCoordinates[0];
+        const incidentLat = geomCoordinates[1];
         const incidentType = payload.new.threat_type;
         const dangerRating = payload.new.risk_weight;
 
         appendConsoleLog(`[WEBSOCKET STREAM] Broadcast event captured: ${incidentType} | Risk Scalar: ${dangerRating}`, "text-red-400 font-bold animate-pulse");
 
-        // Drop a beautiful custom glowing anchor dot on map changes
+        // Drop a beautiful custom glowing anchor dot on map updates dynamically without refreshes
         const customHazardIcon = L.divIcon({
             className: 'custom-hazard-node',
             html: `<div class='h-6 w-6 bg-red-500 rounded-full border-2 border-white ring-8 ring-red-500/30 animate-ping absolute'></div><div class='h-6 w-6 bg-red-600 rounded-full border-2 border-white flex items-center justify-center font-black text-[10px] text-white shadow-2xl relative z-10 font-mono'>!</div>`,
-            iconSize:
+            iconSize: [24, 24]
         });
 
         L.marker([incidentLat, incidentLng], { icon: customHazardIcon }).addTo(map)
@@ -110,7 +107,7 @@ supabaseInstance
         }
     });
 
-// 4. Dispatch RAG Prompts to Serverless Python Agent
+// 4. Dispatch natural language prompts to Serverless Python Agent Matrix
 async function dispatchAgenticRAG() {
     const textPrompt = document.getElementById('ai-prompt').value.trim();
     if(!textPrompt) {

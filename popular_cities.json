@@ -5,8 +5,7 @@
       "centroid": [13.0827, 80.2707],
       "static_safety_rating": 0.88,
       "sectors": [
-        { "name": "Central Core Grid", "illumination_index": 0.92, "crime_incidence_factor": 0.04 },
-        { "name": "Vulnerable Bypass 3", "illumination_index": 0.45, "crime_incidence_factor": 0.28 }
+        { "name": "Central Core Grid", "illumination_index": 0.92, "crime_incidence_factor": 0.04 }
       ]
     }
   ]
