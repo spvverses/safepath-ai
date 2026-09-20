@@ -5,6 +5,8 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 // =========================================================================
 
 
+
+
 // 1. Initialize Baseline Geospatial Grid Viewport Map Canvas
 let clientLat = 13.0827; // Default Fallback Coordinates Centroid Anchor (Chennai)
 let clientLng = 80.2707;
@@ -93,7 +95,8 @@ supabaseInstance
         const customHazardIcon = L.divIcon({
             className: 'custom-hazard-node',
             html: `<div class='h-6 w-6 bg-red-500 rounded-full border-2 border-white ring-8 ring-red-500/30 animate-ping absolute'></div><div class='h-6 w-6 bg-red-600 rounded-full border-2 border-white flex items-center justify-center font-black text-[10px] text-white shadow-2xl relative z-10 font-mono'>!</div>`,
-            iconSize: [24, 24]
+            iconSize:,
+            iconAnchor: [12, 12]
         });
 
         L.marker([incidentLat, incidentLng], { icon: customHazardIcon }).addTo(map)
