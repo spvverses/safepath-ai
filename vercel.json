@@ -2,12 +2,14 @@
   "version": 2,
   "cleanUrls": true,
   "builds": [
-    { "src": "frontend/index.html", "use": "@vercel/static" },
-    { "src": "backend/main.py", "use": "@vercel/python" }
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "main.py", "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "backend/main.py" },
-    { "src": "/(.*)", "dest": "frontend/index.html" }
+    { "src": "/app.js", "dest": "/app.js" },
+    { "src": "/popular_cities.json", "dest": "/popular_cities.json" },
+    { "src": "/api/(.*)", "dest": "main.py" },
+    { "src": "/(.*)", "dest": "index.html" }
   ],
   "headers": [
     {
