@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "functions": {
     "main.py": {
-      "runtime": "vercel-python@3.9"
+      "runtime": "@vercel/python@0.1.1"
     }
   },
   "routes": [
@@ -23,4 +23,5 @@
     }
   ]
 }
+
 
