@@ -1,0 +1,10 @@
+export type LatLng={lat:number;lng:number};
+export type PlaceHit={id:string;name:string;label:string;lat:number;lng:number};
+export type RouteStep={instruction:string;distance:number;duration:number;name:string;location:LatLng};
+export type SafetyBreakdown={lighting:number;populated:number;emergency:number;isolation:number;weather:number;time:number};
+export type RouteKind="safest"|"balanced"|"fastest";
+export type ScoredRoute={id:string;kind:RouteKind;distance:number;duration:number;geometry:LatLng[];steps:RouteStep[];score:number;breakdown:SafetyBreakdown;reasons:string[]};
+export type AmenityKind="police"|"hospital"|"clinic"|"pharmacy"|"fire"|"shop"|"lamp";
+export type Amenity={id:string;kind:AmenityKind;name:string;lat:number;lng:number};
+export type SafetyBrief={headline:string;summary:string;watchOuts:string[];tips:string[];sources:string[]};
+export type PlanResult={routes:ScoredRoute[];amenities:Amenity[];brief:SafetyBrief;night:boolean;weather?:{temperature:number;precipitation:number;wind:number;code:number}};
