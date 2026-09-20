@@ -4,7 +4,7 @@
   "routes": [
     { "src": "/app.js", "dest": "/app.js" },
     { "src": "/popular_cities.json", "dest": "/popular_cities.json" },
-    { "src": "/api/agent", "dest": "api/main.py" },
+    { "src": "/api/agent", "dest": "api/index.py" },
     { "src": "/(.*)", "dest": "index.html" }
   ],
   "headers": [
@@ -18,3 +18,4 @@
     }
   ]
 }
+
