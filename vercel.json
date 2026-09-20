@@ -1,11 +1,6 @@
 {
   "version": 2,
   "cleanUrls": true,
-  "functions": {
-    "api/main.py": {
-      "runtime": "python3.11"
-    }
-  },
   "routes": [
     { "src": "/app.js", "dest": "/app.js" },
     { "src": "/popular_cities.json", "dest": "/popular_cities.json" },
