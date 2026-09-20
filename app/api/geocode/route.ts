@@ -1,0 +1,1 @@
+import {NextResponse} from "next/server";import {geocode} from "@/lib/providers";export async function GET(req:Request){const q=new URL(req.url).searchParams.get("q");if(!q)return NextResponse.json([]);try{return NextResponse.json(await geocode(q))}catch(e){return NextResponse.json({error:String(e)},{status:502})}}
